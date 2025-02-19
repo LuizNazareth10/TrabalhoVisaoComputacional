@@ -1,0 +1,1 @@
+tensorflow:2.16.1 ##python versao 3.13 não roda
