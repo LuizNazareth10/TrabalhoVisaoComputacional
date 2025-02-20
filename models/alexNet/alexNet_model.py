@@ -1,5 +1,5 @@
 from tensorflow.keras import layers
-from tensorflow.keras.models import Sequential, Model, load_model
+from tensorflow.keras.models import Model, load_model
 import os
 
 class AlexNet(object):
