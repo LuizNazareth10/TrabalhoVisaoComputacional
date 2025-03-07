@@ -2,12 +2,17 @@ from tensorflow.keras import layers
 from tensorflow.keras.models import Model, load_model
 import os
 
-##2 x CONV2D -> RELU -> MAXPOOL -> 2 x CONV2D -> RELU ->
-# MAXPOOL -> 2 x CONV2D -> RELU -> MAXPOOL -> 2 x CONV2D -> 
-# RELU -> MAXPOOL -> 2 x CONV2D -> RELU -> MAXPOOL -> FLATTEN -> 
-# FC1 -> FC2 -> FC3 -> output
+# 2 x CONV2D -> RELU -> MAXPOOL -> 
+# 2 x CONV2D -> RELU -> MAXPOOL -> 
+# 2 x CONV2D -> RELU -> MAXPOOL -> 
+# 2 x CONV2D -> RELU -> MAXPOOL -> 
+# 2 x CONV2D -> RELU -> MAXPOOL -> 
+# FLATTEN -> DENSE_1 -> DROPOUT -> 
+# DENSE_2 -> DROPOUT -> 
+# DENSE_3 -> output
+
 class VGG13(object):
-    def __init__(self):
+    def __init__(self, numero_classes=1000):
         self.input_shape = (227, 227, 3)
         self.model = self.create_VGG13(self.input_shape)
         
@@ -17,7 +22,7 @@ class VGG13(object):
     def max_pooling(self,kernel_size = 2, strides = 2):
         return layers.MaxPooling2D(pool_size=kernel_size, strides=strides, padding="same")
     
-    def create_VGG13(self, input_shape):
+    def create_VGG13(self, input_shape, numero_classes=1000):
         inputs = layers.Input(shape=input_shape)
         x = self.conv2d(64, 3, 1, "relu")(inputs)
         x = self.conv2d(64, 3, 1, "relu")(x)
@@ -39,7 +44,8 @@ class VGG13(object):
         x = layers.Dropout(0.5)(x)
         x = layers.Dense(4096, activation="relu")(x)
         x = layers.Dropout(0.5)(x)
-        x = layers.Dense(1000, activation = "softmax")(x)
+        # x = layers.Dense(1000, activation = "softmax")(x)
+        x = layers.Dense(numero_classes, activation = "softmax")(x)
         
         model = Model(inputs = inputs, outputs = x)
         

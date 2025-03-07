@@ -4,5 +4,6 @@ from models.vgg13.vgg13 import VGG13
 # a = AlexNet()
 # a.model.summary()
 
-v = VGG13()
-v.model.summary()
+# v = VGG13()
+# v.model.summary()
+

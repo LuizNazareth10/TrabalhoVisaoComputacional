@@ -2,6 +2,16 @@ from tensorflow.keras import layers
 from tensorflow.keras.models import Model, load_model
 import os
 
+# CONV2D -> RELU -> MAXPOOL -> 
+# CONV2D -> RELU -> MAXPOOL ->
+# CONV2D -> RELU -> MAXPOOL -> 
+# CONV2D -> RELU -> MAXPOOL -> 
+# CONV2D -> RELU -> MAXPOOL -> 
+# FLATTEN -> DENSE_1 -> 
+# DENSE_2 -> DROPOUT -> 
+# DENSE_3 -> DROPOUT ->  
+# DENSE_4-> output
+
 class AlexNet(object):
     def __init__(self, numero_classes=1000):
         self.numero_classes = numero_classes
@@ -31,7 +41,8 @@ class AlexNet(object):
         x = layers.Dropout(0.5)(x)
         x = layers.Dense(4096, activation="relu")(x)
         x = layers.Dropout(0.5)(x)
-        x = layers.Dense(1000, activation = "softmax")(x)
+        # x = layers.Dense(1000, activation = "softmax")(x)
+        x = layers.Dense(num_classes, activation = "softmax")(x)
     
         model = Model(inputs = inputs, outputs = x)
         
