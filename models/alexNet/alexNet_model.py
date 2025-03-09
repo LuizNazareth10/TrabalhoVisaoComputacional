@@ -35,6 +35,7 @@ class AlexNet(object):
         x = self.conv2d(384, 3, 1, "relu")(x)
         x = self.conv2d(256, 3, 1, "relu")(x)
         x = self.max_pooling(3, 2)(x)
+        
         x = layers.Flatten()(x)
         x = layers.Dense(9216, activation="relu")(x)
         x = layers.Dense(4096, activation="relu")(x)

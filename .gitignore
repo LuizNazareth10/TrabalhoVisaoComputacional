@@ -1,2 +1,5 @@
 # .gitignore
 venv/
+data/
+best_alexnet_cifar10*
+teste_ignore.txt
